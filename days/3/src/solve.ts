@@ -65,5 +65,21 @@ export const partA: Solver = (lines: string[]) => {
 };
 
 export const partB: Solver = (lines: string[]) => {
-  return 0;
+  let ratioSum = 0;
+
+  for (let row = 0; row < lines.length; row += 1) {
+    const line = lines[row];
+    for (let col = 0; col < lines.length; col += 1) {
+      const char = line[col];
+
+      if (char === "*") {
+        const nums = Object.values(getSurroundingNums(lines, row, col));
+        if (nums.length === 2) {
+          ratioSum += nums.reduce((prod, num) => prod * num, 1);
+        }
+      }
+    }
+  }
+
+  return ratioSum;
 };
